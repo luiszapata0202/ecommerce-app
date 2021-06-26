@@ -11,7 +11,7 @@ namespace ECommerceApp
         {
             InitializeComponent();
 
-            MainPage = new SignUpPage();
+            MainPage = new NavigationPage(new SignUpPage());
         }
 
         protected override void OnStart()

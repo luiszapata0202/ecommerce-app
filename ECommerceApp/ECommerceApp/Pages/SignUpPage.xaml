@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="ECommerceApp.Pages.SignUpPage">
+             xmlns:vm="clr-namespace:ECommerceApp.ViewModels"
+             x:Class="ECommerceApp.Pages.SignUpPage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout
@@ -19,21 +21,25 @@
                             Style="{StaticResource TitleLabel}"/>
 
                         <Entry
+                            Text="{Binding FullName}"
                             Style="{StaticResource FormEntry}"
                             Placeholder="Full Name"
                             Keyboard="Text"/>
 
                         <Entry
+                            Text="{Binding Email}"
                             Style="{StaticResource FormEntry}"
                             Placeholder="Email"
                             Keyboard="Email"/>
 
                         <Entry
+                            Text="{Binding Password}"
                             Style="{StaticResource FormEntry}"
                             Placeholder="Password"
                             IsPassword="True"/>
 
                         <Entry
+                            Text="{Binding PasswordConfirmation}"
                             Style="{StaticResource FormEntry}"
                             Placeholder="Confirm Password"
                             IsPassword="True"/>
@@ -46,11 +52,10 @@
                     </StackLayout>
                 </Frame>
 
-                <Button
-                    x:Name="btnContinue"
-                    Clicked="btnContinue_Clicked"
+                <Button                    
                     Text="Continue"
-                    Style="{StaticResource SubmitButton}"/>
+                    Style="{StaticResource SubmitButton}"
+                    Command="{Binding ContinueCommand}"/>
 
                 <Label 
                     TextColor="#80574D"
@@ -58,10 +63,9 @@
                     HorizontalTextAlignment="Center"/>
 
                 <Button
-                    x:Name="btnLogin"
-                    Clicked="btnLogin_Clicked"
                     Text="Login"
-                    Style="{StaticResource SubmitButton}"/>
+                    Style="{StaticResource SubmitButton}"
+                    Command="{Binding LoginCommand}"/>
             </StackLayout>
         </ScrollView>        
     </ContentPage.Content>
