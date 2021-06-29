@@ -111,7 +111,7 @@ namespace ECommerceApp.ViewModels
 
         private async Task Login()
         {
-            await _navigation.PushAsync(new LoginPage());
+            await _navigation.PushModalAsync(new LoginPage());
         }
 
         private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
