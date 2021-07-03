@@ -1,5 +1,6 @@
 ﻿using System;
 using ECommerceApp.Pages;
+using ECommerceApp.PlatformSpecific;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,9 @@ namespace ECommerceApp
             InitializeComponent();
 
             MainPage = new NavigationPage(new SignUpPage());
+
+            var setupTheme = DependencyService.Get<ISetupTheme>();
+            setupTheme.SetStatusBarColor((Color)Current.Resources["StatusBar"]);
         }
 
         protected override void OnStart()

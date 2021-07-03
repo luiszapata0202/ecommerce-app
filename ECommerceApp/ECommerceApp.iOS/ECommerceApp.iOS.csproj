@@ -67,6 +67,7 @@
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
+    <Compile Include="PlatformSpecific\SetupTheme.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -135,5 +136,128 @@
       <Project>{689D5388-047B-4250-9B4F-16C079CA30F6}</Project>
       <Name>ECommerceApp</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backarrow.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backarrow%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backarrow%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\banner.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\banner%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\banner%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cart%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\cart%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\close.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\close%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\close%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\contact.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\contact%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\contact%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-568h%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default-Portrait%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\Default%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\kfc.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\kfc%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\kfc%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logout.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logout%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\logout%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menu.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menu%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\menu%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\minus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\minus%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\minus%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\order%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\order%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\plus%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\plus%403x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shopping_cart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shopping_cart%402x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\shopping_cart%403x.png" />
   </ItemGroup>
 </Project>

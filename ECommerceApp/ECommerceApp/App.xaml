@@ -3,20 +3,28 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="ECommerceApp.App">
     <Application.Resources>
+        <Color x:Key="StatusBar">#AB000E</Color>
+        <Color x:Key="Primary">#CE0B06</Color>
+        <Color x:Key="PrimaryDark">#AB000E</Color>
+        <Color x:Key="TextPrimary">White</Color>
+        <Color x:Key="TextSecondary">#80574D</Color>
+        <Color x:Key="SubtitleText">Black</Color>
+        <Color x:Key="WindowBackground">#F7F5F4</Color>
+
         <Style TargetType="Label" x:Key="TitleLabel">
             <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
             <Setter Property="FontSize" Value="Large"/>
             <Setter Property="FontAttributes" Value="Bold"/>
-            <Setter Property="TextColor" Value="#CE0B06"/>
+            <Setter Property="TextColor" Value="{StaticResource Primary}"/>
         </Style>
 
         <Style TargetType="Entry" x:Key="FormEntry">
-            <Setter Property="PlaceholderColor" Value="#80574D"/>
+            <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondary}"/>
         </Style>
 
         <Style TargetType="Button" x:Key="SubmitButton">
             <Setter Property="TextColor" Value="White"/>
-            <Setter Property="BackgroundColor" Value="#CE0B06"/>
+            <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
         </Style>
     </Application.Resources>
 </Application>
