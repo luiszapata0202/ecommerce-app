@@ -1,5 +1,4 @@
-﻿using System;
-using ECommerceApp.Helpers;
+﻿using ECommerceApp.Helpers;
 using ECommerceApp.Interfaces;
 using ECommerceApp.Pages;
 using ECommerceApp.PlatformSpecific;
@@ -9,7 +8,6 @@ using Prism;
 using Prism.Ioc;
 using Xamarin.Essentials;
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 
 namespace ECommerceApp
 {
@@ -64,7 +62,9 @@ namespace ECommerceApp
             containerRegistry.RegisterForNavigation<LoginPage, LoginViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
 
+            containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<IUserService, UserService>();
+            containerRegistry.Register<IProductService, ProductService>();
         }
     }
 }
