@@ -1,20 +1,19 @@
-﻿using System.ComponentModel;
-using System.Net.Http;
-using System.Runtime.CompilerServices;
+﻿using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
 using ECommerceApp.Pages;
 using Newtonsoft.Json;
+using Prism.Commands;
+using Prism.Navigation;
 using Xamarin.Forms;
 
 namespace ECommerceApp.ViewModels
 {
-    public class SignUpViewModel : INotifyPropertyChanged
+    public class SignUpViewModel : ViewModelBase
     {
-        #region Private Attributes
-        private INavigation _navigation;
+        #region Private Attributes        
         private string _fullName;
         private string _email;
         private string _password;
@@ -22,21 +21,18 @@ namespace ECommerceApp.ViewModels
         #endregion
 
         #region Constructor
-        public SignUpViewModel(INavigation navigation)
+        public SignUpViewModel(INavigationService navigationService)
+            : base(navigationService)
         {
-            _navigation = navigation;
-
-            ContinueCommand = new Command(async () => await Continue());
-            LoginCommand = new Command(async () => await Login());
+            ContinueCommand = new DelegateCommand(async () => await Continue());
+            LoginCommand = new DelegateCommand(async () => await Login());
         }
         #endregion
 
         #region Public Properties
-        public event PropertyChangedEventHandler PropertyChanged;
+        public DelegateCommand ContinueCommand { get; set; }
 
-        public ICommand ContinueCommand { get; set; }
-
-        public ICommand LoginCommand { get; set; }
+        public DelegateCommand LoginCommand { get; set; }
 
         public string FullName
         {
@@ -56,7 +52,7 @@ namespace ECommerceApp.ViewModels
             set
             {
                 _password = value;
-                NotifyPropertyChanged();
+                SetProperty(ref _password, value);
             }
         }
 
@@ -66,7 +62,7 @@ namespace ECommerceApp.ViewModels
             set
             {
                 _passwordConfirmation = value;
-                NotifyPropertyChanged();
+                SetProperty(ref _passwordConfirmation, value);
             }
         }
         #endregion
@@ -103,20 +99,15 @@ namespace ECommerceApp.ViewModels
                 }
                 else
                 {
-                    await UserDialogs.Instance.AlertAsync("Your account has been created", "Hi");
-                    await _navigation.PushModalAsync(new LoginPage());
+                    await UserDialogs.Instance.AlertAsync("Your account has been created", "Hi");                    
+                    await NavigationService.NavigateAsync("LoginPage", useModalNavigation: true);
                 }
             }
         }
 
         private async Task Login()
         {
-            await _navigation.PushModalAsync(new LoginPage());
-        }
-
-        private void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+            await NavigationService.NavigateAsync("LoginPage", useModalNavigation: true);
         }
         #endregion
     }

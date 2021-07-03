@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
+<prism:PrismApplication xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
              x:Class="ECommerceApp.App">
     <Application.Resources>
         <Color x:Key="StatusBar">#AB000E</Color>
@@ -27,4 +28,4 @@
             <Setter Property="BackgroundColor" Value="{StaticResource Primary}"/>
         </Style>
     </Application.Resources>
-</Application>
+</prism:PrismApplication>

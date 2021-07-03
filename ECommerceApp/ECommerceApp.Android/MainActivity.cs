@@ -6,6 +6,10 @@ using Android.Runtime;
 using Android.OS;
 using Acr.UserDialogs;
 using Plugin.CurrentActivity;
+using Prism;
+using Prism.Ioc;
+using ECommerceApp.PlatformSpecific;
+using ECommerceApp.Droid.PlatformSpecific;
 
 namespace ECommerceApp.Droid
 {
@@ -20,13 +24,21 @@ namespace ECommerceApp.Droid
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
-            LoadApplication(new App());
+            LoadApplication(new App(new AndroidInitializer()));
         }
         public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
             Xamarin.Essentials.Platform.OnRequestPermissionsResult(requestCode, permissions, grantResults);
 
             base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
+
+        public class AndroidInitializer : IPlatformInitializer
+        {
+            public void RegisterTypes(IContainerRegistry containerRegistry)
+            {
+                containerRegistry.Register<ISetupTheme, SetupTheme>();
+            }
         }
     }
 }

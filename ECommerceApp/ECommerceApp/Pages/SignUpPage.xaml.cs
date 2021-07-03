@@ -1,5 +1,4 @@
-﻿using ECommerceApp.ViewModels;
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace ECommerceApp.Pages
@@ -10,7 +9,6 @@ namespace ECommerceApp.Pages
         public SignUpPage()
         {
             InitializeComponent();
-            BindingContext = new SignUpViewModel(Navigation);
         }
     }
 }
