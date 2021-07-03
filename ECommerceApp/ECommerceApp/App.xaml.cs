@@ -1,9 +1,13 @@
 ﻿using System;
+using ECommerceApp.Helpers;
+using ECommerceApp.Interfaces;
 using ECommerceApp.Pages;
 using ECommerceApp.PlatformSpecific;
+using ECommerceApp.Services;
 using ECommerceApp.ViewModels;
 using Prism;
 using Prism.Ioc;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -16,11 +20,27 @@ namespace ECommerceApp
         {
         }
 
-        protected override async void OnInitialized()
+        protected async override void OnInitialized()
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new SignUpPage());           
+            var accessToken = Preferences.Get("accessToken", string.Empty);
+
+            if (string.IsNullOrEmpty(accessToken))
+            {
+                await NavigationService.NavigateAsync("NavigationPage/SignUpPage");
+            }
+            else
+            {
+                if (TokenValidator.CheckTokenValidity())
+                {
+                    await NavigationService.NavigateAsync("NavigationPage/HomePage");
+                }
+                else
+                {
+                    await NavigationService.NavigateAsync("NavigationPage/SignUpPage");
+                }
+            }
         }
 
         protected override void OnStart()
@@ -42,6 +62,9 @@ namespace ECommerceApp
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<SignUpPage, SignUpViewModel>();
             containerRegistry.RegisterForNavigation<LoginPage, LoginViewModel>();
+            containerRegistry.RegisterForNavigation<HomePage, HomePageViewModel>();
+
+            containerRegistry.Register<IUserService, UserService>();
         }
     }
 }

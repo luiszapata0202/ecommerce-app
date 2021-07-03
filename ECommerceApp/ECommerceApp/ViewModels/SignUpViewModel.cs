@@ -3,6 +3,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using Acr.UserDialogs;
+using ECommerceApp.Interfaces;
 using ECommerceApp.Pages;
 using Newtonsoft.Json;
 using Prism.Commands;
@@ -13,7 +14,8 @@ namespace ECommerceApp.ViewModels
 {
     public class SignUpViewModel : ViewModelBase
     {
-        #region Private Attributes        
+        #region Private Attributes
+        private IUserService _userService;
         private string _fullName;
         private string _email;
         private string _password;
@@ -21,9 +23,12 @@ namespace ECommerceApp.ViewModels
         #endregion
 
         #region Constructor
-        public SignUpViewModel(INavigationService navigationService)
+        public SignUpViewModel(INavigationService navigationService,
+            IUserService userService)
             : base(navigationService)
         {
+            _userService = userService;
+
             ContinueCommand = new DelegateCommand(async () => await Continue());
             LoginCommand = new DelegateCommand(async () => await Login());
         }
@@ -79,23 +84,11 @@ namespace ECommerceApp.ViewModels
             }
             else
             {
-                var register = new
+                var result = await _userService.Register(FullName, Email, Password);
+
+                if (!result)
                 {
-                    Name = FullName,
-                    Email = Email,
-                    Password = Password
-                };
-
-                var json = JsonConvert.SerializeObject(register);
-
-                var httpClient = new HttpClient();
-                var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-                var response = await httpClient.PostAsync("https://ecommercebackendapi.azurewebsites.net/api/Accounts/Register", content);
-
-                if (!response.IsSuccessStatusCode)
-                {
-                    await UserDialogs.Instance.AlertAsync("Please try again later", "Error");
+                    await UserDialogs.Instance.AlertAsync("Something went wrong", "Error");
                 }
                 else
                 {

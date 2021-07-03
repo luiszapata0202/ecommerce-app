@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Acr.UserDialogs;
+using ECommerceApp.Interfaces;
 using Prism.Navigation;
 using Xamarin.Forms;
 
@@ -8,15 +10,19 @@ namespace ECommerceApp.ViewModels
 {
     public class LoginViewModel : ViewModelBase
     {
-        #region Private Attributes        
+        #region Private Attributes
+        private readonly IUserService _userService;
         private string _email;
         private string _password;
         #endregion
 
         #region Constructor
-        public LoginViewModel(INavigationService navigation)
+        public LoginViewModel(INavigationService navigation,
+            IUserService userService)
             :base(navigation)
         {
+            _userService = userService;
+
             SubmitCommad = new Command(async () => await Login());
         }
         #endregion
@@ -38,9 +44,18 @@ namespace ECommerceApp.ViewModels
         #endregion
 
         #region Methods
-        private Task Login()
+        private async Task Login()
         {
-            throw new NotImplementedException();
+            var result = await _userService.Login(Email, Password);
+
+            if (!result)
+            {
+                await UserDialogs.Instance.AlertAsync("Something went wrong", "Error");
+            }
+            else
+            {
+                await NavigationService.NavigateAsync("HomePage");
+            }
         }
         #endregion
     }
