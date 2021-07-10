@@ -5,7 +5,7 @@
              xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              xmlns:ffitransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
-             BackgroundColor="Black"
+             BackgroundColor="#f8f6f8"
              x:Class="ECommerceApp.Pages.HomePage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
@@ -90,8 +90,9 @@
 
             <Grid
                 VerticalOptions="Start"
-                HorizontalOptions="FillAndExpand"
-                >
+                ColumnSpacing="0"
+                RowSpacing="0"
+                HorizontalOptions="FillAndExpand"> 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="8*"/>
@@ -100,28 +101,69 @@
 
                 <Grid.RowDefinitions>
                     <RowDefinition Height="20"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>
+                    <RowDefinition Height="40"/>                    
                 </Grid.RowDefinitions>
 
-                <!--<Image
-                    Grid.Row="0"
-                    Grid.Column="0"
+                <Image
                     Grid.ColumnSpan="3"
                     Grid.RowSpan="25"                    
                     Aspect="Fill"
-                    Source="banner.png"/>-->
+                    Source="banner.png"/>
 
                 <StackLayout
                     Orientation="Horizontal"
-                    Grid.Row="1">
+                    Grid.Row="1"
+                    Grid.ColumnSpan="3">
                     <ImageButton
+                        BackgroundColor="Transparent"
                         HeightRequest="30"
                         Margin="20,20,0,0"
                         Source="menu.png"
-                        Command="{Binding ShowMenuCommand}"/>                    
+                        Command="{Binding ShowMenuCommand}"/>
+
+                    <Grid                        
+                        HorizontalOptions="EndAndExpand">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="3*"/>
+                            <ColumnDefinition Width="7*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Image
+                            HorizontalOptions="Center"
+                            VerticalOptions="Center"
+                            Grid.Row="1"
+                            Grid.RowSpan="2"
+                            Source="cart.png"/>
+
+                        <Frame
+                            Padding="1"
+                            CornerRadius="55"
+                            VerticalOptions="End"
+                            HorizontalOptions="Start"
+                            Grid.Column="1"
+                            Grid.RowSpan="2"
+                            BackgroundColor="{StaticResource Primary}">
+                            <Label
+                                TextColor="White"
+                                Text="{Binding ShoppingCartItemsCount}"
+                                VerticalTextAlignment="Center"
+                                HorizontalTextAlignment="Center"
+                                HeightRequest="25"
+                                WidthRequest="25"/>
+                        </Frame>
+
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding ShoppingCartCommand}"/>
+                        </Grid.GestureRecognizers>
+                    </Grid>
                 </StackLayout>
 
                 <Image
@@ -129,32 +171,62 @@
                     Source="kfc.png"
                     Grid.RowSpan="3"
                     HeightRequest="30"
-                    Grid.Column="1"/>
+                    Grid.Column="1"/>                
+            </Grid>
 
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                        <RowDefinition/>
-                    </Grid.RowDefinitions>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.65*"/>
+                    <ColumnDefinition Width="0.35*"/>
+                </Grid.ColumnDefinitions>
 
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
+                <StackLayout
+                    BackgroundColor="White">
+                    <Grid
+                        BackgroundColor="{StaticResource Primary}"
+                        HeightRequest="130">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="4*"/>
+                            <ColumnDefinition Width="6*"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <Image
+                            Margin="5"
+                            Source="kfc.png"/>
 
-                    <Image
-                        HorizontalOptions="Center"
-                        VerticalOptions="Center"
-                        Grid.Row="2"
-                        Grid.RowSpan="3"
-                        Source="cart.png"/>
-                    <Frame>
-                        <Label
-                            TextColor="Red"
-                            Text="0"/>
-                    </Frame>
-                </Grid>
+                        <StackLayout
+                            Grid.Column="1"
+                            Margin="15,0,15,0"
+                            VerticalOptions="Center">
+                            <Label
+                                Text="Welcome"
+                                FontSize="Large"
+                                TextColor="White"/>
+                            
+                            <Label
+                                Text="Test User"
+                                FontSize="Small"
+                                TextColor="White"/>
+                        </StackLayout>
+
+                    </Grid>
+
+                    <StackLayout 
+                        Orientation="Horizontal"
+                        Margin="20,0,0,0">
+                        <Image 
+                            Source="logout.png"
+                            HeightRequest="30"/>
+
+                        <Label 
+                            Text="Logout"
+                            VerticalTextAlignment="Center"/>
+                    </StackLayout>
+
+                    <StackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                    </StackLayout.GestureRecognizers>
+                </StackLayout>
             </Grid>
         </Grid>
     </ContentPage.Content>  
