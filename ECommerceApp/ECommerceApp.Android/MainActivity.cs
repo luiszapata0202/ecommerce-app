@@ -23,6 +23,7 @@ namespace ECommerceApp.Droid
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);
             UserDialogs.Init(this);
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(enableFastRenderer: true);
             CrossCurrentActivity.Current.Init(this, savedInstanceState);
             LoadApplication(new App(new AndroidInitializer()));
         }

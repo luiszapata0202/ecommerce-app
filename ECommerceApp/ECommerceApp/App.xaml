@@ -19,6 +19,12 @@
             <Setter Property="TextColor" Value="{StaticResource Primary}"/>
         </Style>
 
+        <Style TargetType="Label" x:Key="SubTitleLabel">
+            <Setter Property="HorizontalOptions" Value="Start"/>
+            <Setter Property="FontSize" Value="Medium"/>            
+            <Setter Property="TextColor" Value="{StaticResource SubtitleText}"/>
+        </Style>
+
         <Style TargetType="Entry" x:Key="FormEntry">
             <Setter Property="PlaceholderColor" Value="{StaticResource TextSecondary}"/>
         </Style>

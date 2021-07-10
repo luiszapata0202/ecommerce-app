@@ -2,9 +2,160 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:ffitransformation="clr-namespace:FFImageLoading.Transformations;assembly=FFImageLoading.Transformations"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="ECommerceApp.Pages.HomePage">
+             BackgroundColor="Black"
+             x:Class="ECommerceApp.Pages.HomePage"
+             NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Label>Hola, Mundo</Label>
+        <Grid>
+            <CollectionView
+                Margin="10"
+                ItemsSource="{Binding PopularProducts}">
+                <CollectionView.ItemsLayout>
+                    <GridItemsLayout
+                        Orientation="Vertical"
+                        Span="2"/>
+                </CollectionView.ItemsLayout>
+
+                <CollectionView.Header>
+                    <StackLayout>
+                        <Label
+                            Margin="0, 150, 0, 0"
+                            Style="{StaticResource SubTitleLabel}"
+                            Text="Our Menu"/>
+
+                        <CollectionView
+                            ItemsSource="{Binding Categories}"
+                            HeightRequest="130"
+                            HorizontalScrollBarVisibility="Never">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Horizontal"/>
+                            </CollectionView.ItemsLayout>
+
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
+                                    <StackLayout>
+                                        <ffimageloading:CachedImage
+                                            Source="{Binding FullImageUrl}"
+                                            WidthRequest="80"
+                                            HeightRequest="80"
+                                            Margin="10">
+                                            <ffimageloading:CachedImage.Transformations>
+                                                <ffitransformation:CircleTransformation/>
+                                            </ffimageloading:CachedImage.Transformations>
+                                        </ffimageloading:CachedImage>
+
+                                        <Label
+                                            Style="{StaticResource SubTitleLabel}"
+                                            TextColor="{StaticResource PrimaryDark}"
+                                            HorizontalOptions="Center"
+                                            Text="{Binding Name}"/>
+                                    </StackLayout>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+
+                        <Label
+                            Text="Popular Products"
+                            Style="{StaticResource SubTitleLabel}"/>
+                    </StackLayout>
+                </CollectionView.Header>
+
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout
+                            Spacing="5"
+                            Padding="10"
+                            HeightRequest="200"
+                            Orientation="Vertical">
+
+                            <ffimageloading:CachedImage
+                                Source="{Binding FullImageUrl}"
+                                WidthRequest="150"
+                                HeightRequest="150"/>
+
+                            <Label
+                                Style="{StaticResource SubTitleLabel}"
+                                Text="{Binding Name}"/>
+
+                            <Label
+                                TextColor="{StaticResource Primary}"
+                                Text="{Binding Price, StringFormat='${0}'}"/>
+                        </StackLayout>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+            <Grid
+                VerticalOptions="Start"
+                HorizontalOptions="FillAndExpand"
+                >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="8*"/>
+                    <ColumnDefinition Width="1*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="20"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+
+                <!--<Image
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Grid.ColumnSpan="3"
+                    Grid.RowSpan="25"                    
+                    Aspect="Fill"
+                    Source="banner.png"/>-->
+
+                <StackLayout
+                    Orientation="Horizontal"
+                    Grid.Row="1">
+                    <ImageButton
+                        HeightRequest="30"
+                        Margin="20,20,0,0"
+                        Source="menu.png"
+                        Command="{Binding ShowMenuCommand}"/>                    
+                </StackLayout>
+
+                <Image
+                    Margin="0,25,0,0"
+                    Source="kfc.png"
+                    Grid.RowSpan="3"
+                    HeightRequest="30"
+                    Grid.Column="1"/>
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+
+                    <Image
+                        HorizontalOptions="Center"
+                        VerticalOptions="Center"
+                        Grid.Row="2"
+                        Grid.RowSpan="3"
+                        Source="cart.png"/>
+                    <Frame>
+                        <Label
+                            TextColor="Red"
+                            Text="0"/>
+                    </Frame>
+                </Grid>
+            </Grid>
+        </Grid>
     </ContentPage.Content>  
 </ContentPage>

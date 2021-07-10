@@ -64,6 +64,15 @@
     </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2012" />
     <PackageReference Include="Xamarin.Essentials" Version="1.6.1" />
+    <PackageReference Include="Xamarin.FFImageLoading">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Forms">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations">
+      <Version>2.4.11.982</Version>
+    </PackageReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MainActivity.cs" />
@@ -97,7 +106,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\ECommerceApp\ECommerceApp.csproj">
-      <Project>{689D5388-047B-4250-9B4F-16C079CA30F6}</Project>
+      <Project>{7D5C45DA-9C9D-4CC8-9222-B19D0F593EFE}</Project>
       <Name>ECommerceApp</Name>
     </ProjectReference>
   </ItemGroup>

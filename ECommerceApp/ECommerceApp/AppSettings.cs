@@ -2,6 +2,6 @@
 {
     public static class AppSettings
     {
-        public static string ApiUrl = "https://ecommercebackendapi.azurewebsites.net/";
+        public static string ApiUrl = "https://ecommercebackendapi.azurewebsites.net";
     }
 }
