@@ -65,6 +65,7 @@ namespace ECommerceApp
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IProductService, ProductService>();
+            containerRegistry.Register<IShoppingCartService, ShoppingCartService>();
         }
     }
 }

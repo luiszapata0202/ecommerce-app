@@ -7,14 +7,17 @@ namespace ECommerceApp.ViewModels
     {
         #region Private Attributes
         private readonly IProductService _productService;
+        private readonly IShoppingCartService _shoppingCartService;
         #endregion
 
         #region Constructor
         public HomePageViewModel(INavigationService navigationService,
-            IProductService productService)
+            IProductService productService,
+            IShoppingCartService shoppingCartService)
             : base(navigationService)
         {
             _productService = productService;
+            _shoppingCartService = shoppingCartService;
         }
         #endregion
 
@@ -23,6 +26,7 @@ namespace ECommerceApp.ViewModels
         {
             var categories = await _productService.GetCategories();
             var popularProducts = await _productService.GetPopularProducts();
+            var cartItemsCount = await _shoppingCartService.GetCartItemsCount();
         }
         #endregion
     }
