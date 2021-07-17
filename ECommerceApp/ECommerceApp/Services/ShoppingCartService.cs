@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ECommerceApp.Interfaces;
+using ECommerceApp.Models;
 using Xamarin.Essentials;
 
 namespace ECommerceApp.Services
@@ -30,6 +31,24 @@ namespace ECommerceApp.Services
             var count = result["totalItems"];
 
             return count;            
+        }
+
+        public async Task<bool> AddProductToCart(Product product, int quantity)
+        {
+            int userId = Preferences.Get("userId", 0);
+
+            var data = new
+            {
+                Price = product.Price,
+                Qty = quantity,
+                TotalAmount = product.Price * quantity,
+                ProductId = product.Id,
+                CustomerId = userId
+            };
+
+            var response = await _apiService.PostAsync<string>(data, "ShoppingCartItems", true);
+
+            return response.IsSuccess;
         }
         #endregion
     }

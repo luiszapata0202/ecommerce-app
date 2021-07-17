@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:ffImageLoading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ECommerceApp.Pages.ProductDetailPage">
+    <ScrollView>
+        <StackLayout>
+            <Grid>
+                <ffImageLoading:CachedImage
+                    HeightRequest="300"
+                    Source="{Binding ProductImageUrl}"/>
+
+                <ImageButton
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"
+                    HeightRequest="40"
+                    WidthRequest="40"
+                    Source="close.png"
+                    BackgroundColor="Transparent"
+                    Command="{Binding GoBackCommand}"/>
+            </Grid>
+
+            <StackLayout Margin="20">
+                <StackLayout Orientation="Horizontal">
+                    <Label 
+                        Text="{Binding ProductName}"
+                        TextColor="{StaticResource TextSecondary}"
+                        HorizontalOptions="Start"
+                        FontSize="Large"/>
+
+                    <StackLayout 
+                        HorizontalOptions="EndAndExpand"
+                        Orientation="Horizontal">
+                        <Label
+                            Text="{Binding Price}"
+                            TextColor="{StaticResource TextSecondary}"
+                            FontSize="Large"/>
+
+                        <Label
+                            Text="$"
+                            TextColor="{StaticResource TextSecondary}"
+                            FontSize="Large"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Label
+                    Text="Product Detail"
+                    FontSize="Large"
+                    TextColor="{StaticResource Primary}"/>
+
+                <Label
+                    Text="{Binding Description}"
+                    HorizontalOptions="Start"
+                    TextColor="{StaticResource TextSecondary}"/>
+            </StackLayout>
+
+            <StackLayout
+                Spacing="20"
+                Orientation="Horizontal"
+                VerticalOptions="EndAndExpand"
+                HorizontalOptions="CenterAndExpand"
+                Margin="0,0,0,40">
+                <ImageButton
+                    HeightRequest="40"
+                    Source="minus.png"
+                    BackgroundColor="Transparent"
+                    Command="{Binding DecrementCommand}"/>
+
+                <Label
+                    Text="{Binding Quantity}"
+                    FontSize="Large"
+                    VerticalTextAlignment="Center"
+                    TextColor="{StaticResource TextSecondary}"/>
+
+                <ImageButton
+                    HeightRequest="40"
+                    Source="plus.png"
+                    BackgroundColor="Transparent"
+                    Command="{Binding IncrementCommand}"/>
+            </StackLayout>
+
+            <StackLayout Orientation="Horizontal">
+                <StackLayout
+                    HorizontalOptions="FillAndExpand"
+                    Margin="30,0,0,10">
+                    <Label 
+                        Text="Total price"
+                        FontSize="Medium"
+                        TextColor="{StaticResource Primary}"/>
+
+                    <StackLayout Orientation="Horizontal">
+                        <Label
+                            Text="{Binding Total}"
+                            TextColor="{StaticResource TextSecondary}"
+                            FontSize="Medium"/>
+
+                        <Label
+                            Text="$"
+                            TextColor="{StaticResource TextSecondary}"
+                            FontSize="Medium"/>
+                    </StackLayout>
+                </StackLayout>
+
+                <Button
+                    Text="Add to cart"
+                    HorizontalOptions="FillAndExpand"
+                    Style="{StaticResource SubmitButton}"
+                    Command="{Binding AddToCartCommand}"/>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

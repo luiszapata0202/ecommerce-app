@@ -9,114 +9,119 @@
              x:Class="ECommerceApp.Pages.HomePage"
              NavigationPage.HasNavigationBar="False">
     <ContentPage.Content>
-        <Grid>
-            <CollectionView
-                Margin="10"
-                ItemsSource="{Binding PopularProducts}">
-                <CollectionView.ItemsLayout>
-                    <GridItemsLayout
+        <RefreshView
+            Command="{Binding RefreshCommand}"
+            IsRefreshing="{Binding IsRefreshing}">
+            <Grid>
+                <CollectionView
+                    Margin="10"
+                    ItemsSource="{Binding PopularProducts}"
+                    SelectedItem="{Binding SelectedProduct}"
+                    SelectionMode="Single">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout
                         Orientation="Vertical"
                         Span="2"/>
-                </CollectionView.ItemsLayout>
+                    </CollectionView.ItemsLayout>
 
-                <CollectionView.Header>
-                    <StackLayout>
-                        <Label
+                    <CollectionView.Header>
+                        <StackLayout>
+                            <Label
                             Margin="0, 150, 0, 0"
                             Style="{StaticResource SubTitleLabel}"
                             Text="Our Menu"/>
 
-                        <CollectionView
+                            <CollectionView
                             ItemsSource="{Binding Categories}"
                             HeightRequest="130"
                             HorizontalScrollBarVisibility="Never">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout Orientation="Horizontal"/>
-                            </CollectionView.ItemsLayout>
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Horizontal"/>
+                                </CollectionView.ItemsLayout>
 
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate>
-                                    <StackLayout>
-                                        <ffimageloading:CachedImage
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <StackLayout>
+                                            <ffimageloading:CachedImage
                                             Source="{Binding FullImageUrl}"
                                             WidthRequest="80"
                                             HeightRequest="80"
                                             Margin="10">
-                                            <ffimageloading:CachedImage.Transformations>
-                                                <ffitransformation:CircleTransformation/>
-                                            </ffimageloading:CachedImage.Transformations>
-                                        </ffimageloading:CachedImage>
+                                                <ffimageloading:CachedImage.Transformations>
+                                                    <ffitransformation:CircleTransformation/>
+                                                </ffimageloading:CachedImage.Transformations>
+                                            </ffimageloading:CachedImage>
 
-                                        <Label
+                                            <Label
                                             Style="{StaticResource SubTitleLabel}"
                                             TextColor="{StaticResource PrimaryDark}"
                                             HorizontalOptions="Center"
                                             Text="{Binding Name}"/>
-                                    </StackLayout>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
 
-                        <Label
+                            <Label
                             Text="Popular Products"
                             Style="{StaticResource SubTitleLabel}"/>
-                    </StackLayout>
-                </CollectionView.Header>
+                        </StackLayout>
+                    </CollectionView.Header>
 
-                <CollectionView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <StackLayout
                             Spacing="5"
                             Padding="10"
                             HeightRequest="200"
                             Orientation="Vertical">
 
-                            <ffimageloading:CachedImage
+                                <ffimageloading:CachedImage
                                 Source="{Binding FullImageUrl}"
                                 WidthRequest="150"
                                 HeightRequest="150"/>
 
-                            <Label
+                                <Label
                                 Style="{StaticResource SubTitleLabel}"
                                 Text="{Binding Name}"/>
 
-                            <Label
+                                <Label
                                 TextColor="{StaticResource Primary}"
                                 Text="{Binding Price, StringFormat='${0}'}"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
+                            </StackLayout>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
 
-            <Grid
+                <Grid
                 VerticalOptions="Start"
                 ColumnSpacing="0"
                 RowSpacing="0"
-                HorizontalOptions="FillAndExpand"> 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="1*"/>
-                </Grid.ColumnDefinitions>
+                HorizontalOptions="FillAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="8*"/>
+                        <ColumnDefinition Width="1*"/>
+                    </Grid.ColumnDefinitions>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="20"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition Height="40"/>                    
-                </Grid.RowDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="20"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
 
-                <Image
+                    <Image
                     Grid.ColumnSpan="3"
                     Grid.RowSpan="25"                    
                     Aspect="Fill"
                     Source="banner.png"/>
 
-                <StackLayout
+                    <StackLayout
                     Orientation="Horizontal"
                     Grid.Row="1"
                     Grid.ColumnSpan="3">
-                    <ImageButton
+                        <ImageButton
                         BackgroundColor="Transparent"
                         HeightRequest="30"
                         Margin="20,20,0,0"
@@ -124,27 +129,27 @@
                         Command="{Binding ShowMenuCommand}"
                         CommandParameter="{x:Reference FlyoutMenu}"/>
 
-                    <Grid                        
+                        <Grid                        
                         HorizontalOptions="EndAndExpand">
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="3*"/>
-                            <ColumnDefinition Width="7*"/>
-                        </Grid.ColumnDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="3*"/>
+                                <ColumnDefinition Width="7*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <Image
+                            <Image
                             HorizontalOptions="Center"
                             VerticalOptions="Center"
                             Grid.Row="1"
                             Grid.RowSpan="2"
                             Source="cart.png"/>
 
-                        <Frame
+                            <Frame
                             Padding="1"
                             CornerRadius="55"
                             VerticalOptions="End"
@@ -152,94 +157,96 @@
                             Grid.Column="1"
                             Grid.RowSpan="2"
                             BackgroundColor="{StaticResource Primary}">
-                            <Label
+                                <Label
                                 TextColor="White"
                                 Text="{Binding ShoppingCartItemsCount}"
                                 VerticalTextAlignment="Center"
                                 HorizontalTextAlignment="Center"
                                 HeightRequest="25"
                                 WidthRequest="25"/>
-                        </Frame>
+                            </Frame>
 
-                        <Grid.GestureRecognizers>
-                            <TapGestureRecognizer Command="{Binding ShoppingCartCommand}"/>
-                        </Grid.GestureRecognizers>
-                    </Grid>
-                </StackLayout>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding ShoppingCartCommand}"/>
+                            </Grid.GestureRecognizers>
+                        </Grid>
+                    </StackLayout>
 
-                <Image
+                    <Image
                     Margin="0,25,0,0"
                     Source="kfc.png"
                     Grid.RowSpan="3"
                     HeightRequest="30"
-                    Grid.Column="1"/>                
-            </Grid>
+                    Grid.Column="1"/>
+                </Grid>
 
-            <Grid
+                <Grid
                 IsVisible="{Binding IsMenuVisible}">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.65*"/>
-                    <ColumnDefinition Width="0.35*"/>
-                </Grid.ColumnDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="0.65*"/>
+                        <ColumnDefinition Width="0.35*"/>
+                    </Grid.ColumnDefinitions>
 
-                <StackLayout                    
+                    <StackLayout                    
                     x:Name="FlyoutMenu"
                     BackgroundColor="White">
-                    <Grid
+                        <Grid
                         BackgroundColor="{StaticResource Primary}"
                         HeightRequest="130">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="4*"/>
-                            <ColumnDefinition Width="6*"/>
-                        </Grid.ColumnDefinitions>
-                        
-                        <Image
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="6*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Image
                             Margin="5"
                             Source="kfc.png"/>
 
-                        <StackLayout
+                            <StackLayout
                             Grid.Column="1"
                             Margin="15,0,15,0"
                             VerticalOptions="Center">
-                            <Label
+                                <Label
                                 Text="Welcome"
                                 FontSize="Large"
                                 TextColor="White"/>
-                            
-                            <Label
+
+                                <Label
                                 Text="Test User"
                                 FontSize="Small"
                                 TextColor="White"/>
-                        </StackLayout>
+                            </StackLayout>
 
-                    </Grid>
+                        </Grid>
 
-                    <StackLayout 
+                        <StackLayout 
                         Orientation="Horizontal"
                         Margin="20,0,0,0">
-                        <Image 
+                            <Image 
                             Source="logout.png"
                             HeightRequest="30"/>
 
-                        <Label 
+                            <Label 
                             Text="Logout"
                             VerticalTextAlignment="Center"/>
+                        </StackLayout>
+
+                        <StackLayout.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
+                        </StackLayout.GestureRecognizers>
                     </StackLayout>
 
-                    <StackLayout.GestureRecognizers>
-                        <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
-                    </StackLayout.GestureRecognizers>
-                </StackLayout>
-
-                <BoxView
+                    <BoxView
                     Grid.Column="1">
-                    <BoxView.GestureRecognizers>
-                        <TapGestureRecognizer 
+                        <BoxView.GestureRecognizers>
+                            <TapGestureRecognizer 
                             Command="{Binding HideMenuCommand}"
                             CommandParameter="{x:Reference FlyoutMenu}"/>
-                    </BoxView.GestureRecognizers>
-                </BoxView>
+                        </BoxView.GestureRecognizers>
+                    </BoxView>
+                </Grid>
             </Grid>
-        </Grid>
+        </RefreshView>
+        
     </ContentPage.Content>  
 </ContentPage>

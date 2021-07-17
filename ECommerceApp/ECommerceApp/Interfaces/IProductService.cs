@@ -8,5 +8,6 @@ namespace ECommerceApp.Interfaces
     {
         Task<List<Category>> GetCategories();
         Task<List<Product>> GetPopularProducts();
+        Task<Product> GetProductInfo(int productId);
     }
 }

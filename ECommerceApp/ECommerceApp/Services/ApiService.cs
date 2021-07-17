@@ -12,7 +12,7 @@ namespace ECommerceApp.Services
 {
     public class ApiService : IApiService
     {
-        public async Task<Response<T>> PostAsync<T>(object model, string service)
+        public async Task<Response<T>> PostAsync<T>(object model, string service, bool authRequired = false)
             where T : class
         {
             var data = JsonConvert.SerializeObject(model);
@@ -22,6 +22,11 @@ namespace ECommerceApp.Services
             {
                 BaseAddress = new Uri(AppSettings.ApiUrl)
             };
+
+            if (authRequired)
+            {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
+            }
 
             var response = await client.PostAsync($"api/{service}", content);
             var jsonResponse = await response.Content.ReadAsStringAsync();
