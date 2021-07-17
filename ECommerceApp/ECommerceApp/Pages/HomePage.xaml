@@ -121,7 +121,8 @@
                         HeightRequest="30"
                         Margin="20,20,0,0"
                         Source="menu.png"
-                        Command="{Binding ShowMenuCommand}"/>
+                        Command="{Binding ShowMenuCommand}"
+                        CommandParameter="{x:Reference FlyoutMenu}"/>
 
                     <Grid                        
                         HorizontalOptions="EndAndExpand">
@@ -174,13 +175,15 @@
                     Grid.Column="1"/>                
             </Grid>
 
-            <Grid>
+            <Grid
+                IsVisible="{Binding IsMenuVisible}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.65*"/>
                     <ColumnDefinition Width="0.35*"/>
                 </Grid.ColumnDefinitions>
 
-                <StackLayout
+                <StackLayout                    
+                    x:Name="FlyoutMenu"
                     BackgroundColor="White">
                     <Grid
                         BackgroundColor="{StaticResource Primary}"
@@ -227,6 +230,15 @@
                         <TapGestureRecognizer Command="{Binding LogoutCommand}"/>
                     </StackLayout.GestureRecognizers>
                 </StackLayout>
+
+                <BoxView
+                    Grid.Column="1">
+                    <BoxView.GestureRecognizers>
+                        <TapGestureRecognizer 
+                            Command="{Binding HideMenuCommand}"
+                            CommandParameter="{x:Reference FlyoutMenu}"/>
+                    </BoxView.GestureRecognizers>
+                </BoxView>
             </Grid>
         </Grid>
     </ContentPage.Content>  

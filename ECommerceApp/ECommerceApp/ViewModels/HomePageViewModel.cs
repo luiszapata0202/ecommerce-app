@@ -7,6 +7,7 @@ using ECommerceApp.Models;
 using Prism.Commands;
 using Prism.Navigation;
 using Xamarin.Essentials;
+using Xamarin.Forms;
 
 namespace ECommerceApp.ViewModels
 {
@@ -16,13 +17,7 @@ namespace ECommerceApp.ViewModels
         private readonly IProductService _productService;
         private readonly IShoppingCartService _shoppingCartService;
         private int _shoppingCartItemsCount;
-
-        public int ShoppingCartItemsCount
-        {
-            get { return _shoppingCartItemsCount; }
-            set { SetProperty(ref _shoppingCartItemsCount, value); }
-        }
-
+        private bool _isMenuVisible;
         #endregion
 
         #region Constructor
@@ -36,18 +31,32 @@ namespace ECommerceApp.ViewModels
 
             PopularProducts = new ObservableCollection<Product>();
             Categories = new ObservableCollection<Category>();
-            ShowMenuCommand = new DelegateCommand(ShowMenu);
+            ShowMenuCommand = new DelegateCommand<StackLayout>(ShowMenu);
+            HideMenuCommand = new DelegateCommand<StackLayout>(HideMenu);
             ShoppingCartCommand = new DelegateCommand(ShoppingCart);
             LogoutCommand = new DelegateCommand(async () => await Logout());
         }
         #endregion
 
         #region Public Properties
-        public DelegateCommand ShowMenuCommand { get; set; }
+        public DelegateCommand<StackLayout> ShowMenuCommand { get; set; }
         public DelegateCommand ShoppingCartCommand { get; set; }
         public DelegateCommand LogoutCommand { get; set; }
+        public DelegateCommand<StackLayout> HideMenuCommand { get; set; }
         public ObservableCollection<Product> PopularProducts { get; set; }
         public ObservableCollection<Category> Categories { get; set; }
+
+        public bool IsMenuVisible
+        {
+            get { return _isMenuVisible; }
+            set { SetProperty(ref _isMenuVisible, value); }
+        }
+
+        public int ShoppingCartItemsCount
+        {
+            get { return _shoppingCartItemsCount; }
+            set { SetProperty(ref _shoppingCartItemsCount, value); }
+        }
         #endregion
 
         #region Methods
@@ -69,9 +78,16 @@ namespace ECommerceApp.ViewModels
             ShoppingCartItemsCount = cartItemsCount;
         }
 
-        private void ShowMenu()
+        private async void ShowMenu(StackLayout flyoutMenu)
         {
-           
+            IsMenuVisible = true;
+            await flyoutMenu.TranslateTo(0, 0, 500, Easing.Linear);
+        }
+
+        private async void HideMenu(StackLayout flyoutMenu)
+        {
+            await flyoutMenu.TranslateTo(-250, 0, 500, Easing.Linear);
+            IsMenuVisible = false;
         }
 
         private void ShoppingCart()
