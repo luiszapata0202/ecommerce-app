@@ -1,10 +1,8 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Windows.Input;
+﻿using System.Threading.Tasks;
 using Acr.UserDialogs;
 using ECommerceApp.Interfaces;
+using Prism.Commands;
 using Prism.Navigation;
-using Xamarin.Forms;
 
 namespace ECommerceApp.ViewModels
 {
@@ -23,12 +21,14 @@ namespace ECommerceApp.ViewModels
         {
             _userService = userService;
 
-            SubmitCommad = new Command(async () => await Login());
+            SubmitCommad = new DelegateCommand(async () => await Login());
+            GoBackCommand = new DelegateCommand(async () => await GoBack());
         }
         #endregion
 
         #region Public Properties
-        public ICommand SubmitCommad { get; set; }
+        public DelegateCommand SubmitCommad { get; set; }
+        public DelegateCommand GoBackCommand { get; set; }
 
         public string Email
         {
@@ -46,7 +46,11 @@ namespace ECommerceApp.ViewModels
         #region Methods
         private async Task Login()
         {
+            UserDialogs.Instance.ShowLoading("Logging in...");
+
             var result = await _userService.Login(Email, Password);
+
+            UserDialogs.Instance.HideLoading();
 
             if (!result)
             {
@@ -56,6 +60,11 @@ namespace ECommerceApp.ViewModels
             {
                 await NavigationService.NavigateAsync("HomePage");
             }
+        }
+
+        private async Task GoBack()
+        {
+            await NavigationService.GoBackAsync(useModalNavigation: true);
         }
         #endregion
     }

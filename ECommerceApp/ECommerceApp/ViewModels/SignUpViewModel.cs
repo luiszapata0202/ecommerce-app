@@ -84,7 +84,11 @@ namespace ECommerceApp.ViewModels
             }
             else
             {
+                UserDialogs.Instance.ShowLoading("Registration in progress...");
+
                 var result = await _userService.Register(FullName, Email, Password);
+
+                UserDialogs.Instance.HideLoading();
 
                 if (!result)
                 {
