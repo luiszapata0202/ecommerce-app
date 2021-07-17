@@ -20,6 +20,7 @@ namespace ECommerceApp.ViewModels
         private bool _isMenuVisible;
         private bool _isRefreshing;
         private Product _selectedProduct;
+        private Category _selectedCategory;
         #endregion
 
         #region Constructor
@@ -77,14 +78,19 @@ namespace ECommerceApp.ViewModels
                 GoToProductDetail();
             }
         }
+
+        public Category SelectedCategory
+        {
+            get { return _selectedCategory; }
+            set
+            {
+                SetProperty(ref _selectedCategory, value);
+                GoToProductList();
+            }
+        }
         #endregion
 
         #region Methods
-        public async override void Initialize(INavigationParameters parameters)
-        {
-          
-        }
-
         public async override void OnNavigatedTo(INavigationParameters parameters)
         {
             await LoadData();
@@ -162,6 +168,16 @@ namespace ECommerceApp.ViewModels
 
             await NavigationService.NavigateAsync("ProductDetailPage", navParams, useModalNavigation:true);
         }
+        private async Task GoToProductList()
+        {
+            var navParams = new NavigationParameters
+            {
+                {"category", _selectedCategory}
+            };
+
+            await NavigationService.NavigateAsync("ProductListPage", navParams, useModalNavigation: true);
+        }
+
         #endregion
     }
 }

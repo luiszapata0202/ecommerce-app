@@ -62,6 +62,7 @@ namespace ECommerceApp
             containerRegistry.RegisterForNavigation<LoginPage, LoginViewModel>();
             containerRegistry.RegisterForNavigation<HomePage, HomeViewModel>();
             containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailViewModel>();
+            containerRegistry.RegisterForNavigation<ProductListPage, ProductListViewModel>();
 
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<IUserService, UserService>();

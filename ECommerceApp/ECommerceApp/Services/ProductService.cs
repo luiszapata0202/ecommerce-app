@@ -39,6 +39,13 @@ namespace ECommerceApp.Services
 
             return response.Result;
         }
+
+        public async Task<List<Product>> GetProductsByCategory(int categoryId)
+        {
+            var response = await _apiService.GetAsync<List<Product>>($"Products/ProductsByCategory/{categoryId}");
+
+            return response.Result;
+        }
         #endregion
     }
 }

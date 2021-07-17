@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<StackLayout xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
+             xmlns:prism="http://prismlibrary.com"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ECommerceApp.UserControls.ProductCellUserControl"
+             Spacing="5"
+             Padding="10"
+             HeightRequest="200"
+             Orientation="Vertical">
+    <ffimageloading:CachedImage
+        Source="{Binding FullImageUrl}"
+        WidthRequest="150"
+        HeightRequest="150"/>
+
+    <Label
+        Style="{StaticResource SubTitleLabel}"
+        Text="{Binding Name}"/>
+
+    <Label
+        TextColor="{StaticResource Primary}"
+        Text="{Binding Price, StringFormat='${0}'}"/>
+</StackLayout>
