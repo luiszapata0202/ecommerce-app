@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ECommerceApp.Models;
 
 namespace ECommerceApp.Interfaces
@@ -7,5 +8,7 @@ namespace ECommerceApp.Interfaces
     {
         Task<int> GetCartItemsCount();
         Task<bool> AddProductToCart(Product product, int quantity);
+        Task<List<ShoppingCartItem>> GetShoppingCartItems();
+        Task<bool> ClearShoppingCartItems();
     }
 }

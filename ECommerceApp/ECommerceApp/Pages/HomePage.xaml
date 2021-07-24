@@ -203,6 +203,26 @@
                             </StackLayout>
 
                         </Grid>
+                        
+                        <StackLayout 
+                            Spacing="30"
+                            Orientation="Horizontal"
+                            Margin="20,0,0,0">
+                            <Image 
+                                Source="order.png"
+                                HeightRequest="30"
+                                WidthRequest="30" />
+
+                            <Label 
+                                Text="My Orders"
+                                TextColor="#80574D"
+                                HeightRequest="50"
+                                VerticalTextAlignment="Center"
+                                FontSize="20" />
+                            <StackLayout.GestureRecognizers>
+                                <TapGestureRecognizer Command="{Binding GoToMyOrdersCommand}"/>
+                            </StackLayout.GestureRecognizers>
+                        </StackLayout>
 
                         <StackLayout 
                         Orientation="Horizontal"

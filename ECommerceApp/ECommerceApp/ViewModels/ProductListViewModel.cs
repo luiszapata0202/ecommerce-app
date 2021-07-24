@@ -14,9 +14,6 @@ namespace ECommerceApp.ViewModels
         #region Private Attributes
         private readonly IProductService _productService;
         private string _categoryName;
-
-
-
         #endregion
 
         #region Constructor
@@ -27,12 +24,10 @@ namespace ECommerceApp.ViewModels
             _productService = productService;
 
             Products = new ObservableCollection<Product>();
-            GoBackCommand = new DelegateCommand(async () => await GoBack());
         }
         #endregion
 
-        #region Public Properties
-        public DelegateCommand GoBackCommand { get; set; }
+        #region Public Properties        
         public ObservableCollection<Product> Products { get; set; }
 
         public string CategoryName
@@ -47,7 +42,7 @@ namespace ECommerceApp.ViewModels
         {
             var category = parameters.GetValue<Category>("category");
 
-            CategoryName = category.Name;
+            Title = category.Name;
 
             UserDialogs.Instance.ShowLoading("Loading...");
 
@@ -63,11 +58,6 @@ namespace ECommerceApp.ViewModels
             {
                 Products.Add(product);
             }
-        }
-
-        private async Task GoBack()
-        {
-            await NavigationService.GoBackAsync(useModalNavigation: true);
         }
         #endregion
     }

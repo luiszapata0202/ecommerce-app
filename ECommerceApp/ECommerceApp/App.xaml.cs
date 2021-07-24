@@ -1,4 +1,5 @@
-﻿using ECommerceApp.Helpers;
+﻿using Acr.UserDialogs;
+using ECommerceApp.Helpers;
 using ECommerceApp.Interfaces;
 using ECommerceApp.Pages;
 using ECommerceApp.PlatformSpecific;
@@ -22,6 +23,8 @@ namespace ECommerceApp
         {
             InitializeComponent();
 
+            Xamarin.Essentials.Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+
             var accessToken = Preferences.Get("accessToken", string.Empty);
 
             if (string.IsNullOrEmpty(accessToken))
@@ -38,6 +41,18 @@ namespace ECommerceApp
                 {
                     await NavigationService.NavigateAsync("NavigationPage/SignUpPage");
                 }
+            }
+        }
+
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            if (Connectivity.NetworkAccess == NetworkAccess.Internet)
+            {
+                UserDialogs.Instance.Toast("Internet is back!");
+            }
+            else
+            {
+                UserDialogs.Instance.Toast("We lost internet connection :c");
             }
         }
 
@@ -63,11 +78,15 @@ namespace ECommerceApp
             containerRegistry.RegisterForNavigation<HomePage, HomeViewModel>();
             containerRegistry.RegisterForNavigation<ProductDetailPage, ProductDetailViewModel>();
             containerRegistry.RegisterForNavigation<ProductListPage, ProductListViewModel>();
+            containerRegistry.RegisterForNavigation<ShoppingCartPage, ShoppingCartViewModel>();
+            containerRegistry.RegisterForNavigation<PlaceOrderPage, PlaceOrderViewModel>();
+
 
             containerRegistry.Register<IApiService, ApiService>();
             containerRegistry.Register<IUserService, UserService>();
             containerRegistry.Register<IProductService, ProductService>();
             containerRegistry.Register<IShoppingCartService, ShoppingCartService>();
+            containerRegistry.Register<IOrderService, OrderService>();
         }
     }
 }

@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:uc="clr-namespace:ECommerceApp.UserControls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ECommerceApp.Pages.ShoppingCartPage">
+    <StackLayout>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="8*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <Image
+                Source="backarrow.png"
+                HeightRequest="25"
+                HorizontalOptions="Center"
+                VerticalOptions="Center">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding GoBackCommand}"/>
+                </Image.GestureRecognizers>
+            </Image>
+
+            <Label
+                Grid.Column="1"
+                Text="{Binding Title}"
+                Style="{StaticResource TitleLabel}"/>
+
+            <Label
+                Grid.Column="2"
+                Text="Clear"
+                TextColor="{StaticResource Primary}"
+                FontSize="15"
+                VerticalTextAlignment="Center"
+                HorizontalTextAlignment="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding ClearItemsCommand}"/>
+                </Label.GestureRecognizers>
+            </Label>
+        </Grid> 
+
+        <ListView
+            ItemsSource="{Binding ShoppingCartItems}"
+            HasUnevenRows="True">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Margin="20, 10, 20, 10">
+                            <Label
+                                FontSize="Medium"
+                                TextColor="{StaticResource Primary}"
+                                Text="{Binding ProductName}"/>
+
+                            <StackLayout Orientation="Horizontal">
+                                <Label 
+                                    TextColor="{StaticResource TextSecondary}"
+                                    FontSize="Medium"
+                                    Text="{Binding Quantity}"/>
+
+                                <Label
+                                    TextColor="{StaticResource TextSecondary}"
+                                    FontSize="Medium"
+                                    Text="X"/>
+
+                                <Label 
+                                    FontSize="Medium"
+                                    TextColor="{StaticResource TextSecondary}"
+                                    Text="{Binding Price, StringFormat='{0}$'}"/>
+
+                                <Label 
+                                    TextColor="{StaticResource TextSecondary}"
+                                    FontSize="Medium"
+                                    HorizontalOptions="EndAndExpand"
+                                    Text="{Binding TotalAmount, StringFormat='{0}$'}"/>
+                            </StackLayout>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackLayout Orientation="Horizontal"
+                     VerticalOptions="EndAndExpand">
+            <StackLayout 
+                HorizontalOptions="FillAndExpand"
+                Margin="30, 0, 0, 10">
+                <Label
+                    Text="Total Price"
+                    TextColor="{StaticResource Primary}"
+                    FontSize="Medium"/>
+
+                <StackLayout Orientation="Horizontal">
+                    <Label 
+                        Text="{Binding Total}"
+                        TextColor="{StaticResource TextSecondary}"
+                        FontSize="Medium"/>
+
+                    <Label
+                        Text="$"
+                        TextColor="{StaticResource TextSecondary}"
+                        FontSize="Medium"/>
+                </StackLayout>
+                
+            </StackLayout>
+
+            <Button
+                Text="Place Order"
+                Style="{StaticResource SubmitButton}"
+                HorizontalOptions="FillAndExpand"
+                Command="{Binding PlaceOrderCommand}"/>
+        </StackLayout>
+    </StackLayout>
+</ContentPage>

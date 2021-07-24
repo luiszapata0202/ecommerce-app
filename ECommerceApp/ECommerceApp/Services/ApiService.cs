@@ -60,5 +60,23 @@ namespace ECommerceApp.Services
                 Result = result
             };
         }
+
+        public async Task<bool> DeleteAsync(string service)
+        {
+            var client = new HttpClient
+            {
+                BaseAddress = new Uri(AppSettings.ApiUrl)
+            };
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
+
+            var response = await client.DeleteAsync($"api/{service}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                return true;
+            }
+
+            return false;
+        }
     }
 }

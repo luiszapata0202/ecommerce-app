@@ -18,7 +18,7 @@ namespace ECommerceApp.Services
         {
             _apiService = apiService;
         }
-        #endregion
+        #endregion        
 
         #region Methods
         public async Task<int> GetCartItemsCount()
@@ -49,6 +49,24 @@ namespace ECommerceApp.Services
             var response = await _apiService.PostAsync<string>(data, "ShoppingCartItems", true);
 
             return response.IsSuccess;
+        }
+
+        public async Task<List<ShoppingCartItem>> GetShoppingCartItems()
+        {
+            int userId = Preferences.Get("userId", 0);
+
+            var response = await _apiService.GetAsync<List<ShoppingCartItem>>($"ShoppingCartItems/{userId}");
+
+            return response.Result;
+        }
+
+        public async Task<bool> ClearShoppingCartItems()
+        {
+            int userId = Preferences.Get("userId", 0);
+
+            var response = await _apiService.DeleteAsync($"ShoppingCartItems/{userId}");
+
+            return response;
         }
         #endregion
     }

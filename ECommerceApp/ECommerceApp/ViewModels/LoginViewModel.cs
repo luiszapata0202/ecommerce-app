@@ -17,18 +17,18 @@ namespace ECommerceApp.ViewModels
         #region Constructor
         public LoginViewModel(INavigationService navigation,
             IUserService userService)
-            :base(navigation)
+            : base(navigation)
         {
             _userService = userService;
 
+            Title = "LOGIN";
+
             SubmitCommad = new DelegateCommand(async () => await Login());
-            GoBackCommand = new DelegateCommand(async () => await GoBack());
         }
         #endregion
 
         #region Public Properties
         public DelegateCommand SubmitCommad { get; set; }
-        public DelegateCommand GoBackCommand { get; set; }
 
         public string Email
         {
@@ -60,11 +60,6 @@ namespace ECommerceApp.ViewModels
             {
                 await NavigationService.NavigateAsync("HomePage");
             }
-        }
-
-        private async Task GoBack()
-        {
-            await NavigationService.GoBackAsync(useModalNavigation: true);
         }
         #endregion
     }

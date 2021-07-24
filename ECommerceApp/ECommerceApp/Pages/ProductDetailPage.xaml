@@ -62,7 +62,7 @@
                 VerticalOptions="EndAndExpand"
                 HorizontalOptions="CenterAndExpand"
                 Margin="0,0,0,40">
-                <ImageButton
+                <ImageButton                    
                     HeightRequest="40"
                     Source="minus.png"
                     BackgroundColor="Transparent"

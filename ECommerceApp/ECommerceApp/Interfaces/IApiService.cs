@@ -7,5 +7,6 @@ namespace ECommerceApp.Interfaces
     {
         Task<Response<T>> PostAsync<T>(object model, string service, bool authRequired = false) where T : class;
         Task<Response<T>> GetAsync<T>(string service) where T : class;
+        Task<bool> DeleteAsync(string service);
     }
 }

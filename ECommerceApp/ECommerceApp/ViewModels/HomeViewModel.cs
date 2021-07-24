@@ -36,7 +36,7 @@ namespace ECommerceApp.ViewModels
             Categories = new ObservableCollection<Category>();
             ShowMenuCommand = new DelegateCommand<StackLayout>(ShowMenu);
             HideMenuCommand = new DelegateCommand<StackLayout>(HideMenu);
-            ShoppingCartCommand = new DelegateCommand(ShoppingCart);
+            ShoppingCartCommand = new DelegateCommand(async () => await ShoppingCart());
             LogoutCommand = new DelegateCommand(async () => await Logout());
             RefreshCommand = new DelegateCommand(async () => await RefreshData());
         }
@@ -108,9 +108,9 @@ namespace ECommerceApp.ViewModels
             IsMenuVisible = false;
         }
 
-        private void ShoppingCart()
+        private async Task ShoppingCart()
         {
-
+            await NavigationService.NavigateAsync("ShoppingCartPage", useModalNavigation: true);
         }
 
         private async Task Logout()

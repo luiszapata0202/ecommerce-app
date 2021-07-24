@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:prism="http://prismlibrary.com"
+             xmlns:uc="clr-namespace:ECommerceApp.UserControls"
+             prism:ViewModelLocator.AutowireViewModel="True"
+             x:Class="ECommerceApp.Pages.PlaceOrderPage">
+    <ContentPage.Content>
+        <StackLayout 
+            Spacing="20"
+            Margin="25">
+            <uc:CustomNavBarUserControl/>
+
+            <Frame 
+                HasShadow="True"
+                Padding="25"
+                Margin="0,30,0,30">
+                <StackLayout Margin="0,60,0,60">
+                    <Label 
+                        Text="Provide Your Details"
+                        FontAttributes="Bold"
+                        FontSize="Large"
+                        HorizontalTextAlignment="Center"
+                        TextColor="#CE0B06" />
+
+                    <Entry 
+                        Text="{Binding Name}"
+                        Placeholder="Name"
+                        PlaceholderColor="#80574D"
+                        TextColor="#80574D"
+                        Keyboard="Text" />
+
+                    <Entry 
+                        Text="{Binding Phone}"
+                        Placeholder="Phone"
+                        PlaceholderColor="#80574D"
+                        TextColor="#80574D"
+                        Keyboard="Numeric" />
+
+                    <Editor 
+                        Text="{Binding Address}"
+                        Placeholder="Address"
+                        HeightRequest="100"
+                        PlaceholderColor="#80574D"
+                        TextColor="#80574D"
+                        Keyboard="Default"/>
+                </StackLayout>
+            </Frame>
+
+            <Button 
+                Text="Place My Order"
+                BackgroundColor="#CE0B06"
+                TextColor="White"
+                Command="{Binding PlaceOrderCommand}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
