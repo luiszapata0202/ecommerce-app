@@ -11,7 +11,7 @@
     </Grid.ColumnDefinitions>
 
     <Image
-        Source="backarrow.png"
+        Source="{OnPlatform UWP=Assets/backarrow.png, Android=backarrow.png, iOS=backarrow.png}"
         HeightRequest="25"
         HorizontalOptions="Center"
         VerticalOptions="Center">

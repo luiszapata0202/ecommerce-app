@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"             
              xmlns:prism="http://prismlibrary.com"
+             xmlns:resources="clr-namespace:ECommerceApp.Resx"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="ECommerceApp.Pages.SignUpPage"
              BackgroundColor="#F7F5F4"
@@ -12,60 +13,60 @@
                 Margin="25"
                 Spacing="20">
                 <Label 
-                    Text="SIGN UP" 
+                    Text="{x:Static resources:AppResources.SignUp}" 
                     Style="{StaticResource TitleLabel}"
                     Margin="25, 0, 25, 0"/>
 
                 <Frame>
                     <StackLayout>
                         <Label
-                            Text="Create An Account"
+                            Text="{x:Static resources:AppResources.CreateAccount}" 
                             Style="{StaticResource TitleLabel}"/>
 
                         <Entry
                             Text="{Binding FullName}"
                             Style="{StaticResource FormEntry}"
-                            Placeholder="Full Name"
+                            Placeholder="{x:Static resources:AppResources.FullName}"
                             Keyboard="Text"/>
 
                         <Entry
                             Text="{Binding Email}"
                             Style="{StaticResource FormEntry}"
-                            Placeholder="Email"
+                            Placeholder="{x:Static resources:AppResources.Email}"
                             Keyboard="Email"/>
 
                         <Entry
                             Text="{Binding Password}"
                             Style="{StaticResource FormEntry}"
-                            Placeholder="Password"
+                            Placeholder="{x:Static resources:AppResources.Password}"
                             IsPassword="True"/>
 
                         <Entry
                             Text="{Binding PasswordConfirmation}"
                             Style="{StaticResource FormEntry}"
-                            Placeholder="Confirm Password"
+                            Placeholder="{x:Static resources:AppResources.ConfirmPassword}"
                             IsPassword="True"/>
 
                         <Label
                             TextColor="#80574D"
                             HorizontalTextAlignment="Center"
-                            Text="By creating an account you agree to our Terms of Service and Privacy Policy"
+                            Text="{x:Static resources:AppResources.TermsOfService}"
                             FontSize="Small"/>
                     </StackLayout>
                 </Frame>
 
                 <Button                    
-                    Text="Continue"
+                    Text="{x:Static resources:AppResources.Continue}"
                     Style="{StaticResource SubmitButton}"
                     Command="{Binding ContinueCommand}"/>
 
                 <Label 
                     TextColor="#80574D"
-                    Text="Already have an account?"
+                    Text="{x:Static resources:AppResources.AlreadHaveAccount}"
                     HorizontalTextAlignment="Center"/>
 
                 <Button
-                    Text="Login"
+                    Text="{x:Static resources:AppResources.Login}"
                     Style="{StaticResource SubmitButton}"
                     Command="{Binding LoginCommand}"/>
             </StackLayout>

@@ -1,6 +1,9 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Acr.UserDialogs;
 using ECommerceApp.Interfaces;
+using ECommerceApp.Resx;
+using Microsoft.AppCenter.Analytics;
 using Prism.Commands;
 using Prism.Navigation;
 
@@ -21,7 +24,7 @@ namespace ECommerceApp.ViewModels
         {
             _userService = userService;
 
-            Title = "LOGIN";
+            Title = AppResources.SignIn;
 
             SubmitCommad = new DelegateCommand(async () => await Login());
         }
@@ -58,6 +61,10 @@ namespace ECommerceApp.ViewModels
             }
             else
             {
+                var dic = new Dictionary<string, string>();
+                dic.Add("user", _email);
+                Analytics.TrackEvent("Login", dic);
+
                 await NavigationService.NavigateAsync("HomePage");
             }
         }

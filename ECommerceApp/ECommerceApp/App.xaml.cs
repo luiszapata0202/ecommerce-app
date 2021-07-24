@@ -58,8 +58,8 @@ namespace ECommerceApp
 
         protected override void OnStart()
         {
-            var setupTheme = DependencyService.Get<ISetupTheme>();
-            setupTheme.SetStatusBarColor((Color)Current.Resources["StatusBar"]);
+            //var setupTheme = DependencyService.Get<ISetupTheme>();
+            //setupTheme.SetStatusBarColor((Color)Current.Resources["StatusBar"]);
         }
 
         protected override void OnSleep()

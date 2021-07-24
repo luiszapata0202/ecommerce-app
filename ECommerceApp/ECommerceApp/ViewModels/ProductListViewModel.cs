@@ -42,13 +42,16 @@ namespace ECommerceApp.ViewModels
         {
             var category = parameters.GetValue<Category>("category");
 
-            Title = category.Name;
+            if(category != null)
+            {
+                Title = category.Name;
 
-            UserDialogs.Instance.ShowLoading("Loading...");
+                UserDialogs.Instance.ShowLoading("Loading...");
 
-            await LoadProducts(category.Id);
+                await LoadProducts(category.Id);
 
-            UserDialogs.Instance.HideLoading();
+                UserDialogs.Instance.HideLoading();
+            }            
         }
 
         public async Task LoadProducts(int categoryId)

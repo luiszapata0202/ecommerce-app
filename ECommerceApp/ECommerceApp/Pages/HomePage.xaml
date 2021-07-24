@@ -100,7 +100,7 @@
                     Grid.ColumnSpan="3"
                     Grid.RowSpan="25"                    
                     Aspect="Fill"
-                    Source="banner.png"/>
+                    Source="{OnPlatform UWP=Assets/banner.png, Android=banner.png, iOS=banner.png}"/>
 
                     <StackLayout
                     Orientation="Horizontal"
@@ -110,7 +110,7 @@
                         BackgroundColor="Transparent"
                         HeightRequest="30"
                         Margin="20,20,0,0"
-                        Source="menu.png"
+                        Source="{OnPlatform UWP=Assets/menu.png, Android=menu.png, iOS=menu.png}"
                         Command="{Binding ShowMenuCommand}"
                         CommandParameter="{x:Reference FlyoutMenu}"/>
 
@@ -132,7 +132,7 @@
                             VerticalOptions="Center"
                             Grid.Row="1"
                             Grid.RowSpan="2"
-                            Source="cart.png"/>
+                            Source="{OnPlatform UWP=Assets/cart.png, Android=cart.png, iOS=cart.png}"/>
 
                             <Frame
                             Padding="1"
@@ -220,7 +220,7 @@
                                 VerticalTextAlignment="Center"
                                 FontSize="20" />
                             <StackLayout.GestureRecognizers>
-                                <TapGestureRecognizer Command="{Binding GoToMyOrdersCommand}"/>
+                                <TapGestureRecognizer/>
                             </StackLayout.GestureRecognizers>
                         </StackLayout>
 
@@ -242,7 +242,7 @@
                     </StackLayout>
 
                     <BoxView
-                    Grid.Column="1">
+                    Grid.Column="1" BackgroundColor="Transparent">
                         <BoxView.GestureRecognizers>
                             <TapGestureRecognizer 
                             Command="{Binding HideMenuCommand}"

@@ -15,29 +15,40 @@ namespace ECommerceApp.Services
         public async Task<Response<T>> PostAsync<T>(object model, string service, bool authRequired = false)
             where T : class
         {
-            var data = JsonConvert.SerializeObject(model);
-            var content = new StringContent(data, Encoding.UTF8, "application/json");
-
-            var client = new HttpClient
+            try
             {
-                BaseAddress = new Uri(AppSettings.ApiUrl)
-            };
+                var data = JsonConvert.SerializeObject(model);
+                var content = new StringContent(data, Encoding.UTF8, "application/json");
 
-            if (authRequired)
-            {
-                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
+                var client = new HttpClient
+                {
+                    BaseAddress = new Uri(AppSettings.ApiUrl)
+                };
+
+                if (authRequired)
+                {
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", Preferences.Get("accessToken", string.Empty));
+                }
+
+                var response = await client.PostAsync($"api/{service}", content);
+                var jsonResponse = await response.Content.ReadAsStringAsync();
+
+                var result = JsonConvert.DeserializeObject<T>(jsonResponse);
+
+                return new Response<T>
+                {
+                    IsSuccess = response.IsSuccessStatusCode,
+                    Result = result
+                };
             }
-
-            var response = await client.PostAsync($"api/{service}", content);
-            var jsonResponse = await response.Content.ReadAsStringAsync();
-
-            var result = JsonConvert.DeserializeObject<T>(jsonResponse);
-
-            return new Response<T>
+            catch (Exception)
             {
-                IsSuccess = response.IsSuccessStatusCode,
-                Result = result
-            };
+                return new Response<T>
+                {
+                    IsSuccess = false,
+                    Result = null
+                };
+            }            
         }
 
         public async Task<Response<T>> GetAsync<T>(string service)
